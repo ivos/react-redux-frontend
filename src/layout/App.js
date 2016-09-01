@@ -5,7 +5,7 @@ import Header from './Header'
 const App = ({children, location: {pathname}}) => {
 	const active = pathname.split('/')[1] || 'home'
 	return (
-		<div>
+		<div className="container-fluid">
 			<Header active={active}/>
 			<div>{children}</div>
 		</div>
