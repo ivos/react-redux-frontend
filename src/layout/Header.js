@@ -29,7 +29,7 @@ const Header = ({active}) => (
 						<Link to="/projects">Projects</Link>
 					</li>
 				</ul>
-				<CurrentUser active={active}/>
+				<CurrentUser active={active} isActive={isActive}/>
 			</div>
 
 		</div>

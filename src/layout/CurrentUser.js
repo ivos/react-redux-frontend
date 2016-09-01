@@ -1,9 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 
-const isActive = (current, active) => (current === active) ? 'active' : ''
-
-const CurrentUser = ({active}) => (
+const CurrentUser = ({active, isActive}) => (
 	<ul className="nav navbar-nav navbar-right">
 		<li className={isActive('register', active)}>
 			<Link to="/register">Register</Link>
