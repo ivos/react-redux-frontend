@@ -1,18 +1,14 @@
-import React from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import React from 'react'
+import './App.css'
+import Header from './Header'
 
-const App = ({children}) => (
-	<div className="App">
-		<div className="App-header">
-			<img src={logo} className="App-logo" alt="logo"/>
-			<h2>Welcome to React</h2>
+const App = ({children, location: {pathname}}) => {
+	const active = pathname.split('/')[1] || 'home'
+	return (
+		<div>
+			<Header active={active}/>
+			<div>{children}</div>
 		</div>
-		<p className="App-intro">
-			To get started, edit <code>src/App.js</code> and save to reload.
-		</p>
-		<div>{children}</div>
-	</div>
-)
-
+	)
+}
 export default App

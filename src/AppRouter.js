@@ -1,9 +1,9 @@
-import React from "react"
-import {Router, Route, Redirect, Link, useRouterHistory} from 'react-router'
+import React from 'react'
+import {Router, Route, Redirect, useRouterHistory} from 'react-router'
 import {createHashHistory} from 'history'
-import App from "./layout/App"
-import RegisterPage from "./user/RegisterPage"
-import LoginPage from "./user/LoginPage"
+import App from './layout/App'
+import RegisterPage from './user/RegisterPage'
+import LoginPage from './user/LoginPage'
 
 const appHistory = useRouterHistory(createHashHistory)({queryKey: false})
 
