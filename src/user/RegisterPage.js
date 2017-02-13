@@ -63,26 +63,6 @@ export default React.createClass({
 		)
 	},
 
-	convertFieldError(field, fieldErrors) {
-		if ('username' === field && 'duplicate' === fieldErrors[0]) {
-			return 'This username is already taken.'
-		}
-		if ('email' === field && 'duplicate' === fieldErrors[0]) {
-			return 'This e-mail is already registered.' +
-				' If you forgot your password, please contact the system administrator.'
-		}
-	},
-
-	processResponse(response) {
-		console.log('response', response)
-		if (!processValidationError(this, this.convertFieldError, response)
-			&& response.status >= 300) {
-			console.log('Unknown server error.')
-			return
-		}
-		console.log('Success.')
-	},
-
 	onSubmit() {
 		const {values} = this.state
 		fetch('/api/users', {
@@ -91,10 +71,36 @@ export default React.createClass({
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(values),
-		}).then(this.processResponse)
+		}).then(this.processRegisterResponse)
+			.then(() => fetch('/api/sessions'), {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(values),
+			})
 			.catch(
 				err => console.log('err', err)
 			)
+	},
+
+	processRegisterResponse(response) {
+		if (!processValidationError(this, this.convertFieldError, response)
+			&& response.status >= 300) {
+			console.log('Unknown server error.')
+			return
+		}
+		console.log('Success.')
+	},
+
+	convertFieldError(field, fieldErrors) {
+		if ('username' === field && 'duplicate' === fieldErrors[0]) {
+			return 'This username is already taken.'
+		}
+		if ('email' === field && 'duplicate' === fieldErrors[0]) {
+			return 'This e-mail is already registered.' +
+				' If you forgot your password, please contact the system administrator.'
+		}
 	},
 
 })
